@@ -25,7 +25,6 @@ public class MyLinkedHashMap<K, V> {
     private int getBucketIndex(K key) {
         int hashcode = Math.abs(key.hashCode());
         int index = hashcode % numBuckets;
-        System.out.println("Key :"+key+" hashcode :"+hashcode+" index :"+index);
         return index;
     }
     //method to add key,value to node in linkedList at found index
@@ -47,5 +46,26 @@ public class MyLinkedHashMap<K, V> {
     @Override
     public String toString() {
         return "MyLinkedHashMap List{"+myBucketArray+"}";
+    }
+
+    public INode remove(K deleteKey) {
+        int index = this.getBucketIndex(deleteKey);
+        MyLinkedList<K> myLinkedList = this.myBucketArray.get(index);
+        if(myLinkedList == null) return null;
+        MyMapNode<K,V> previousNode = (MyMapNode<K, V>) myLinkedList.head;
+        MyMapNode<K,V> currentNode = (MyMapNode<K, V>) myLinkedList.head;
+        INode tempNode=null;
+        if(currentNode != null && currentNode.getKey().equals(deleteKey)) {
+            tempNode=currentNode;
+            myLinkedList.head=currentNode.getNext();
+            return tempNode;
+        }
+        while(currentNode != null && !(currentNode.getKey().equals(deleteKey))) {
+            previousNode=currentNode;
+            currentNode= (MyMapNode<K, V>) currentNode.getNext();
+        }
+        tempNode=currentNode;
+        previousNode.setNext(currentNode.getNext());
+        return tempNode;
     }
 }
