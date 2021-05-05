@@ -3,6 +3,7 @@ package com.datastructures;
 public class MyBinaryTree<K extends Comparable<K>> {
     private MyBinaryNode<K> root;
     //add binary node to tree having given key value
+
     public void add(K key) {
         this.root = this.addRecursively(root,key);
     }
@@ -20,10 +21,12 @@ public class MyBinaryTree<K extends Comparable<K>> {
         }
         return current;
     }
+
     //get total nodes in binary tree
     public int getSize() {
         return this.getSizeRecursive(root);
     }
+
     //find size by recursively traversing left & right nodes
     private int getSizeRecursive(MyBinaryNode<K> current) {
         return current == null ? 0 : 1 + this.getSizeRecursive(current.left) +
@@ -33,6 +36,7 @@ public class MyBinaryTree<K extends Comparable<K>> {
     public void displayBinaryTree() {
         preOrderTraversal(this.root);
     }
+
     //traverse binary tree as pre order traversal
     public void preOrderTraversal(MyBinaryNode root) {
         if(root !=  null) {
@@ -41,5 +45,18 @@ public class MyBinaryTree<K extends Comparable<K>> {
             preOrderTraversal(root.left);
             preOrderTraversal(root.right);
         }
+    }
+    //search element in binary tree
+    public MyBinaryNode searchTree(K key) {
+        return searchRecurvisely(this.root,key);
+    }
+    //search nodes recursively to find key
+    private MyBinaryNode searchRecurvisely(MyBinaryNode  root, K key) {
+        if(root == null) return null;
+        if(root.key == key) return root;
+        else if(key.compareTo((K) root.key) <0 )
+             return searchRecurvisely(root.left,key);
+        else
+            return searchRecurvisely(root.right,key);
     }
 }

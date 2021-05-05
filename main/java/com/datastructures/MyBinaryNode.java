@@ -1,6 +1,6 @@
 package com.datastructures;
 
-public class MyBinaryNode <K extends Comparable<K>>{
+public class MyBinaryNode <K extends Comparable<K>> {
     K key;
     MyBinaryNode<K> left;
     MyBinaryNode<K> right;
@@ -10,5 +10,4 @@ public class MyBinaryNode <K extends Comparable<K>>{
         this.left=null;
         this.right=null;
     }
-
 }
